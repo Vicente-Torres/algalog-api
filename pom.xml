@@ -24,7 +24,6 @@
 		<spring.boot.maven.plugin.version>2.6.4</spring.boot.maven.plugin.version>
 
 		<projectlombok.lombok.version>1.18.22</projectlombok.lombok.version>
-		<fasterxml.jackson.dataformat.version>2.13.2</fasterxml.jackson.dataformat.version>
 	</properties>
 
 	<dependencies>
@@ -47,12 +46,6 @@
 			<version>${projectlombok.lombok.version}</version>
 			<scope>provided</scope>
 			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>${fasterxml.jackson.dataformat.version}</version>
 		</dependency>
 	</dependencies>
 
