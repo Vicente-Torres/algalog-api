@@ -17,18 +17,42 @@
 
 	<properties>
 		<java.version>17</java.version>
+
+<!--		Spring dependencies versions-->
+		<spring.boot.start.web.version>2.6.4</spring.boot.start.web.version>
+		<spring.boot.start.test.version>2.6.4</spring.boot.start.test.version>
+		<spring.boot.maven.plugin.version>2.6.4</spring.boot.maven.plugin.version>
+
+		<projectlombok.lombok.version>1.18.22</projectlombok.lombok.version>
+		<fasterxml.jackson.dataformat.version>2.13.2</fasterxml.jackson.dataformat.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.start.web.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring.boot.start.test.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${projectlombok.lombok.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>${fasterxml.jackson.dataformat.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -37,6 +61,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.maven.plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
