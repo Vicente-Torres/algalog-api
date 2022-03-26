@@ -1,0 +1,6 @@
+CREATE TABLE client(
+    id      SERIAL NOT NULL CONSTRAINT pk_client PRIMARY KEY,
+    name    VARCHAR NOT NULL,
+    phone   VARCHAR NOT NULL UNIQUE,
+    email   VARCHAR NOT NULL UNIQUE
+);
