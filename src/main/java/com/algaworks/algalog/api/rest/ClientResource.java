@@ -1,7 +1,7 @@
 package com.algaworks.algalog.api.rest;
 
 import com.algaworks.algalog.model.Client;
-import com.algaworks.algalog.repository.ClientRepository;
+import com.algaworks.algalog.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,40 +23,40 @@ import java.util.List;
 @RequestMapping("/clientes")
 public class ClientResource {
 
-    private ClientRepository clientRepository;
+    private ClientService service;
 
     @GetMapping
     public List<Client> list() {
-        return clientRepository.findAll();
+        return service.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Client> findById(@PathVariable Long id) {
-        return clientRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return service.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client client) {
-        return clientRepository.save(client);
+    public Client save(@Valid @RequestBody Client client) {
+        return service.save(client);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client) {
-        if (!clientRepository.existsById(id)) {
+    public ResponseEntity<Client> update(@PathVariable Long id, @Valid @RequestBody Client client) {
+        if (!service.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         client.setId(id);
-        return ResponseEntity.ok(clientRepository.save(client));
+        return ResponseEntity.ok(service.save(client));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        if (!clientRepository.existsById(id)) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        if (!service.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        clientRepository.deleteById(id);
+        service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
