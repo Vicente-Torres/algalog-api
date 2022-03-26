@@ -1,12 +1,14 @@
 package com.algaworks.algalog.model;
 
+import com.algaworks.algalog.util.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-public class Client {
+import javax.persistence.Entity;
 
-    private Long id;
+@Entity
+@NoArgsConstructor
+public class Client extends BaseEntity<Long> {
 
     @JsonProperty("telefone")
     private String phone;
