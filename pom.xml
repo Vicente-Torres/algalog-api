@@ -22,7 +22,10 @@
 		<spring.boot.start.web.version>2.6.4</spring.boot.start.web.version>
 		<spring.boot.start.test.version>2.6.4</spring.boot.start.test.version>
 		<spring.boot.maven.plugin.version>2.6.4</spring.boot.maven.plugin.version>
+		<spring.boot.starter.data.jpa.version>2.6.4</spring.boot.starter.data.jpa.version>
 
+		<flyway.version>8.5.4</flyway.version>
+		<jdbc.postgres.version>42.3.3</jdbc.postgres.version>
 		<projectlombok.lombok.version>1.18.22</projectlombok.lombok.version>
 	</properties>
 
@@ -46,6 +49,24 @@
 			<version>${projectlombok.lombok.version}</version>
 			<scope>provided</scope>
 			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring.boot.starter.data.jpa.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${jdbc.postgres.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flyway.version}</version>
 		</dependency>
 	</dependencies>
 
