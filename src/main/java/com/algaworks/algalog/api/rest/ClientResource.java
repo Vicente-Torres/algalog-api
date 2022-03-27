@@ -31,8 +31,8 @@ public class ClientResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Client> findById(@PathVariable Long id) {
-        return service.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public Client findById(@PathVariable Long id) {
+        return service.findById(id, HttpStatus.NOT_FOUND);
 
     }
 
