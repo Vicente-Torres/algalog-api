@@ -4,16 +4,10 @@ import com.algaworks.algalog.model.Address;
 import com.algaworks.algalog.service.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -22,19 +16,31 @@ public class AddressResource {
 
     private AddressService service;
 
+
+    @GetMapping
+    public List<Address> findAll() {
+        return service.findAll();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Address save(@Valid @RequestBody Address address) {
         return service.save(address);
     }
 
+    @GetMapping("/{id}")
+    public Address findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Address> update(@PathVariable Long id, @Valid @RequestBody Address address) {
-        if (!service.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        address.setId(id);
-        return ResponseEntity.ok(service.save(address));
+    public Address update(@PathVariable Long id, @Valid @RequestBody Address address) {
+        return service.update(id, address);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        service.deleteById(id);
     }
 
 }
