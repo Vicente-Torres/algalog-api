@@ -26,7 +26,7 @@ public class ClientResource {
     private ClientService service;
 
     @GetMapping
-    public List<Client> list() {
+    public List<Client> listAll() {
         return service.findAll();
     }
 
@@ -43,12 +43,8 @@ public class ClientResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @Valid @RequestBody Client client) {
-        if (!service.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        client.setId(id);
-        return ResponseEntity.ok(service.save(client));
+    public Client update(@PathVariable Long id, @Valid @RequestBody Client client) {
+        return service.update(id, client);
     }
 
     @DeleteMapping("/{id}")

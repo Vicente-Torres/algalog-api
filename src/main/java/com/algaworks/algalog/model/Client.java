@@ -17,7 +17,7 @@ public class Client extends BaseEntity<Long> {
     @Getter
     @NotBlank
     @Size(max = 20)
-    @JsonProperty("telefone")
+    @JsonProperty("telefone") //TODO criar validação para impedir o usuário de salvar uma string qualquer
     private String phone;
 
     @Email

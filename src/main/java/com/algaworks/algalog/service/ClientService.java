@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Service
 @AllArgsConstructor
 public class ClientService {
@@ -22,8 +24,8 @@ public class ClientService {
         return repository.findAll();
     }
 
-    public Client findById(Long id, HttpStatus statusIfNotExist) {
-        return repository.findById(id).orElseThrow(() -> new BusinessException(messageHandler.getMessage("client.not.found"), statusIfNotExist));
+    public Client findById(Long id, HttpStatus statusIfClientNotExist) {
+        return repository.findById(id).orElseThrow(() -> new BusinessException(messageHandler.getMessage("client.not.found"), statusIfClientNotExist));
     }
 
     public Boolean existsById(Long id) {
@@ -44,18 +46,30 @@ public class ClientService {
     }
 
     @Transactional
+    public Client update(Long id, Client client) {
+        if (isNull(client.getId()) || !client.getId().equals(id)) {
+            throw new BusinessException(messageHandler.getMessage("client.update.ids.conflict"));
+        }
+
+        if (!existsById(id)) {
+            throw new BusinessException("client.not.found");
+        }
+        return save(client);
+    }
+
+    @Transactional
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
     private boolean emailAlreadyUsed(Client client) {
         return repository.findByEmail(client.getEmail()).stream()
-            .anyMatch(clientRegistered -> !clientRegistered.equals(client));
+            .anyMatch(clientRegistered -> !clientRegistered.equals(client) && !clientRegistered.getId().equals(client.getId()));
     }
 
     private boolean phoneAlreadyUsed(Client client) {
         return repository.findByPhone(client.getPhone()).stream()
-            .anyMatch(clientRegistered -> !clientRegistered.equals(client));
+            .anyMatch(clientRegistered -> !clientRegistered.equals(client) && !clientRegistered.getId().equals(client.getId()));
     }
 
 }
