@@ -8,14 +8,14 @@ public class BusinessException extends RuntimeException {
     @Getter
     private HttpStatus statusError;
 
-    public BusinessException(String message) {
-        super(message);
-        this.statusError = HttpStatus.BAD_REQUEST;
-    }
+    private final HttpStatus defaultStatusErro = HttpStatus.BAD_REQUEST;
 
-    public BusinessException(String message, HttpStatus statusError) {
+    public BusinessException(String message, HttpStatus... statusError) {
         super(message);
-        this.statusError = statusError;
+        if (statusError.length > 1) {
+            throw new RuntimeException("É esperado apenas um status HTTP para construtor BusinessException");
+        }
+        this.statusError = (statusError.length == 1) ? statusError[0] : defaultStatusErro;
     }
 
 }
