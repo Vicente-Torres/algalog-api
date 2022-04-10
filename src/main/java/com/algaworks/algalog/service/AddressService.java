@@ -44,7 +44,7 @@ public class AddressService {
         }
 
         if (!existsById(id)) {
-            throw new BusinessException("address.not.found");
+            throw new BusinessException(messageHandler.getMessage("address.not.found"));
         }
         return save(address);
     }
