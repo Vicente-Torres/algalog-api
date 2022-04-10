@@ -28,10 +28,6 @@ public class ClientService {
         return repository.findById(id).orElseThrow(() -> new BusinessException(messageHandler.getMessage("client.not.found"), statusIfClientNotExist));
     }
 
-    public Boolean existsById(Long id) {
-        return repository.existsById(id);
-    }
-
     @Transactional
     public Client save(Client client) {
         if (emailAlreadyUsed(client)) {
@@ -59,17 +55,24 @@ public class ClientService {
 
     @Transactional
     public void deleteById(Long id) {
+        if (!existsById(id)) {
+            throw new BusinessException(messageHandler.getMessage("client.not.found"), HttpStatus.NOT_FOUND);
+        }
         repository.deleteById(id);
+    }
+
+    private Boolean existsById(Long id) {
+        return repository.existsById(id);
     }
 
     private boolean emailAlreadyUsed(Client client) {
         return repository.findByEmail(client.getEmail()).stream()
-            .anyMatch(clientRegistered -> !clientRegistered.equals(client) && !clientRegistered.getId().equals(client.getId()));
+                .anyMatch(clientRegistered -> !clientRegistered.equals(client) && !clientRegistered.getId().equals(client.getId()));
     }
 
     private boolean phoneAlreadyUsed(Client client) {
         return repository.findByPhone(client.getPhone()).stream()
-            .anyMatch(clientRegistered -> !clientRegistered.equals(client) && !clientRegistered.getId().equals(client.getId()));
+                .anyMatch(clientRegistered -> !clientRegistered.equals(client) && !clientRegistered.getId().equals(client.getId()));
     }
 
 }
