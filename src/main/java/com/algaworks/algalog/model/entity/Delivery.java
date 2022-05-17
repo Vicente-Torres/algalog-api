@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 // TODO adicionar as mensagens de validação que estão faltando e remover as que não serão mais utilizadas
@@ -55,10 +55,10 @@ public class Delivery extends BaseEntity<Long> {
 
     @Setter
     @JsonProperty(value = "dataPedido", access = READ_ONLY)
-    private LocalDateTime requestDate;
+    private Instant requestDate;
 
     @Setter
     @JsonProperty(value = "dataFinalizacao", access = READ_ONLY)
-    private LocalDateTime finishedDate;
+    private Instant finishedDate;
 
 }

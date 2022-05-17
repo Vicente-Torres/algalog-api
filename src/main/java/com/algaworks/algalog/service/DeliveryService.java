@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -27,7 +27,7 @@ public class DeliveryService {
 
         delivery.setClient(client);
         delivery.setStatus(DeliveryStatus.PENDING);
-        delivery.setRequestDate(LocalDateTime.now());
+        delivery.setRequestDate(Instant.now());
 
         return repository.save(delivery);
     }
