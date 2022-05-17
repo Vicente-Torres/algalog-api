@@ -1,6 +1,6 @@
 package com.algaworks.algalog.repository;
 
-import com.algaworks.algalog.model.Client;
+import com.algaworks.algalog.model.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

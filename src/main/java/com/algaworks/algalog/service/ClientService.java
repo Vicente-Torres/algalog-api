@@ -1,7 +1,7 @@
 package com.algaworks.algalog.service;
 
 import com.algaworks.algalog.exceptionhandler.BusinessException;
-import com.algaworks.algalog.model.Client;
+import com.algaworks.algalog.model.entity.Client;
 import com.algaworks.algalog.repository.ClientRepository;
 import com.algaworks.algalog.util.MessageHandler;
 import lombok.AllArgsConstructor;

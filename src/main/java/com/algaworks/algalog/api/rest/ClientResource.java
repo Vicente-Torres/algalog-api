@@ -1,6 +1,6 @@
 package com.algaworks.algalog.api.rest;
 
-import com.algaworks.algalog.model.Client;
+import com.algaworks.algalog.model.entity.Client;
 import com.algaworks.algalog.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

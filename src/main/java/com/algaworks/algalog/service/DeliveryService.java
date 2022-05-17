@@ -1,6 +1,6 @@
 package com.algaworks.algalog.service;
 
-import com.algaworks.algalog.model.Delivery;
+import com.algaworks.algalog.model.entity.Delivery;
 import com.algaworks.algalog.model.eum.DeliveryStatus;
 import com.algaworks.algalog.repository.DeliveryRepository;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class DeliveryService {
 
         delivery.setClient(client);
         delivery.setStatus(DeliveryStatus.PENDING);
-        delivery.setRequestData(LocalDateTime.now());
+        delivery.setRequestDate(LocalDateTime.now());
 
         return repository.save(delivery);
     }

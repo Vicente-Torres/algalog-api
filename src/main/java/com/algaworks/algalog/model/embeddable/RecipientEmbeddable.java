@@ -1,27 +1,26 @@
-package com.algaworks.algalog.model;
+package com.algaworks.algalog.model.embeddable;
 
-import com.algaworks.algalog.util.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.Embeddable;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+@Embeddable
+public class RecipientEmbeddable {
 
-@Entity
-public class Recipient extends BaseEntity<Long> {
-
+    @Getter
     @NotBlank
     @Size(max = 60)
     @JsonProperty("nome")
     private String name;
 
+    @Valid
     @Getter
     @Setter
-    @OneToOne
     @JsonProperty("endereco")
-    private Address address;
+    private AddressEmbeddable addressEmbeddable;
 
 }

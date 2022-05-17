@@ -1,16 +1,16 @@
-package com.algaworks.algalog.model;
+package com.algaworks.algalog.model.embeddable;
 
-import com.algaworks.algalog.util.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
-@Entity
-public class Address extends BaseEntity<Long> {
+@Embeddable
+public class AddressEmbeddable {
 
     @NotBlank
     @Size(max = 100)
@@ -18,7 +18,8 @@ public class Address extends BaseEntity<Long> {
     private String street;
 
     @JsonProperty("numero")
-    private Integer number;
+    @Pattern(regexp = "\\d*")
+    private String number;
 
     @Size(max = 100)
     @JsonProperty("complemento")
