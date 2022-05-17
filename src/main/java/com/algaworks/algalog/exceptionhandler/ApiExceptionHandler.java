@@ -19,7 +19,7 @@ import java.util.ArrayList;
 @ControllerAdvice
 @AllArgsConstructor
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
-
+    // TODO verificar listagem de campos e suas respectivas mensagens
     private MessageSource messageSource;
 
     @Override

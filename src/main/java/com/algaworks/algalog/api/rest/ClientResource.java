@@ -21,16 +21,16 @@ public class ClientResource {
         return service.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Client findById(@PathVariable Long id) {
-        return service.findById(id, HttpStatus.NOT_FOUND);
-
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client save(@Valid @RequestBody Client client) {
         return service.save(client);
+    }
+
+    @GetMapping("/{id}")
+    public Client findById(@PathVariable Long id) {
+        return service.findById(id, HttpStatus.NOT_FOUND);
+
     }
 
     @PutMapping("/{id}")

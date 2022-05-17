@@ -3,6 +3,7 @@ package com.algaworks.algalog.model.entity;
 import com.algaworks.algalog.model.embeddable.RecipientEmbeddable;
 import com.algaworks.algalog.model.eum.DeliveryStatus;
 import com.algaworks.algalog.util.BaseEntity;
+import com.algaworks.algalog.util.ValidationGroups;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,14 +21,18 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 @Entity
 public class Delivery extends BaseEntity<Long> {
 
+    @Valid
     @Setter
     @Getter
+    @NotNull
     @ManyToOne
     @JsonProperty("cliente")
+    @ConvertGroup(from = Default.class, to = ValidationGroups.EntityId.class)
     private Client client;
 
     @Valid
     @Getter
+    @NotNull
     @Embedded
     @JsonProperty("destinatario")
     @AttributeOverrides({
