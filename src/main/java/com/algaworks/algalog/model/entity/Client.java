@@ -12,10 +12,10 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Client extends BaseEntity<Long> {
 
-    @Getter
     @NotBlank
     @Size(max = 11)
     @JsonProperty("telefone")
@@ -23,7 +23,6 @@ public class Client extends BaseEntity<Long> {
     private String phone;
 
     @Email
-    @Getter
     @Size(max = 100)
     @JsonProperty("e-mail")
     private String email;

@@ -18,12 +18,13 @@ import java.time.Instant;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 // TODO adicionar as mensagens de validação que estão faltando e remover as que não serão mais utilizadas
+
+@Getter
 @Entity
 public class Delivery extends BaseEntity<Long> {
 
     @Valid
     @Setter
-    @Getter
     @NotNull
     @ManyToOne
     @JsonProperty("cliente")
@@ -31,7 +32,7 @@ public class Delivery extends BaseEntity<Long> {
     private Client client;
 
     @Valid
-    @Getter
+    @Setter
     @NotNull
     @Embedded
     @JsonProperty("destinatario")
@@ -44,6 +45,7 @@ public class Delivery extends BaseEntity<Long> {
     })
     private RecipientEmbeddable recipient;
 
+    @Setter
     @NotNull(message = "bateu aq")
     @JsonProperty("taxa")
     private BigDecimal fee;
