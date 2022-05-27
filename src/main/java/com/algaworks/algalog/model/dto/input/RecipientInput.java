@@ -1,5 +1,6 @@
 package com.algaworks.algalog.model.dto.input;
 
+import com.algaworks.algalog.model.embeddable.AddressEmbeddable;
 import com.algaworks.algalog.model.embeddable.RecipientEmbeddable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -16,7 +17,7 @@ public class RecipientInput {
     @JsonProperty("numero")
     private String number;
 
-    @JsonProperty("Bairro")
+    @JsonProperty("bairro")
     private String district;
 
     @JsonProperty("complemento")
@@ -24,7 +25,8 @@ public class RecipientInput {
 
     public static RecipientEmbeddable toEntity(RecipientInput recipientInput) {
         var recipient = new RecipientEmbeddable();
-        recipient.setName(recipient.getName());
+        recipient.setName(recipientInput.getName());
+        recipient.setAddressEmbeddable(new AddressEmbeddable());
         recipient.getAddressEmbeddable().setStreet(recipientInput.getStreet());
         recipient.getAddressEmbeddable().setNumber(recipientInput.getNumber());
         recipient.getAddressEmbeddable().setDistrict(recipientInput.getDistrict());
