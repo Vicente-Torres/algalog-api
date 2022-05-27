@@ -1,6 +1,5 @@
 package com.algaworks.algalog.model.dto.input;
 
-
 import com.algaworks.algalog.model.entity.Delivery;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -27,8 +26,7 @@ public class DeliveryInput {
         var delivery = new Delivery();
         delivery.getClient().setId(delivery.getId());
         delivery.setFee(deliveryInput.getFee());
-        delivery.setRecipient(deliveryInput.getRecipient());
-
+        delivery.setRecipient(RecipientInput.toEntity(deliveryInput.getRecipient()));
         return delivery;
     }
 }
