@@ -15,6 +15,8 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 // TODO adicionar as mensagens de validação que estão faltando e remover as que não serão mais utilizadas
@@ -23,7 +25,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 @Entity
 public class Delivery extends BaseEntity<Long> {
 
-    @Valid
+    @Valid //TODO como esta sendo utilizado dto na camada da api, verificar necessidade de validações
     @Setter
     @NotNull
     @ManyToOne
@@ -49,6 +51,9 @@ public class Delivery extends BaseEntity<Long> {
     @NotNull(message = "bateu aq")
     @JsonProperty("taxa")
     private BigDecimal fee;
+
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+    private List<Occurrence> occurrences = new ArrayList<>();
 
     @Setter
     @Enumerated(EnumType.STRING)

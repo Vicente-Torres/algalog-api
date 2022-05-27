@@ -19,3 +19,10 @@ CREATE TABLE algalog.delivery(
     recipient_house_number          VARCHAR,
     recipient_address_complement    VARCHAR
 );
+
+CREATE TABLE algalog.occurrence(
+    id              SERIAL NOT NULL CONSTRAINT pk_occurrence PRIMARY KEY,
+    delivery_id     INTEGER NOT NULL CONSTRAINT fk_delivery REFERENCES delivery,
+    description     VARCHAR NOT NULL,
+    register_date   TIMESTAMP NOT NULL
+)
