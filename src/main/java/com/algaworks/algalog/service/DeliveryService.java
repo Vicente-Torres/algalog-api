@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.List;
 
+import static com.algaworks.algalog.model.eum.DeliveryStatus.FINISHED;
+import static com.algaworks.algalog.model.eum.DeliveryStatus.PENDING;
+
 @Service
 @AllArgsConstructor
 public class DeliveryService {
@@ -38,6 +41,18 @@ public class DeliveryService {
 
     public Delivery findById(Long id, HttpStatus statusIfDeliveryNotExist) {
         return repository.findById(id).orElseThrow(() -> new BusinessException(messageHandler.getMessage("delivery.not.found"), statusIfDeliveryNotExist));
+    }
+
+    @Transactional
+    public void finishingDelivery(Long deliveryId) {
+        var delivery = findById(deliveryId, HttpStatus.NOT_FOUND);
+
+        if(!delivery.getStatus().equals(PENDING)){
+            throw new BusinessException("A entrega não pode ser finalizada", HttpStatus.BAD_REQUEST);
+        }
+        delivery.setStatus(FINISHED);
+        delivery.setFinishedDate(Instant.now());
+        repository.save(delivery);
     }
 
 }
