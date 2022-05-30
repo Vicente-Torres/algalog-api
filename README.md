@@ -1,4 +1,12 @@
-# Getting Started
+# algalog-api
+## Project
+### Objective
+This project has been developed with the goo of putting on practice the knowledge provided by the course "Mergulho REST" from Alga Works. For that has been proposed by the course a simple API to a 
+delivery system.
+You can see the origin repository provided by the course <a href="https://github.com/algaworks/curso-mergulho-spring-rest">over here</a>
+### Dependencies
+The database chosen to work with the application has been the PostgreSQL. You can use the <a href="https://github.com/Vicente-Torres/algalog-compose">algalog-compose</a> to run the PostgreSQL where the pre-configurations already done.
+## Getting Started
 
 ### Reference Documentation
 For further reference, please consider the following sections:
