@@ -11,7 +11,7 @@
 
 	<groupId>com.algaworks.algalog</groupId>
 	<artifactId>algalog-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0.Final</version>
 	<name>algalog-api</name>
 	<description>algalog-api</description>
 
